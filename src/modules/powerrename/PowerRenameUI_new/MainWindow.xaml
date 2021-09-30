@@ -431,8 +431,8 @@
                    Grid.Column="1" 
                    Source="ms-appx:///Assets/file.png"
                    HorizontalAlignment="Center"/>
-   
-            <TextBlock Text="Original"
+
+            <TextBlock x:Uid="TxtBlock_Original"
                        Grid.Column="2"
                        FontWeight="SemiBold"
                        Margin="2,-2,0,0"
@@ -440,7 +440,7 @@
             <AppBarSeparator Grid.Column="3"
                              Margin="-4,0,0,0"
                              HorizontalAlignment="Left" />
-            <TextBlock Text="Renamed"
+            <TextBlock x:Uid="TxtBlock_Renamed"
                        FontWeight="SemiBold"
                        Grid.Column="3"
                        Margin="0,-2,0,0"
@@ -518,7 +518,7 @@
                         Padding="0,0,0,16">
                 <Grid>
                     <AutoSuggestBox x:Name="textBox_search"
-                             PlaceholderText="Search for"
+                             x:Uid="SearchBox"
                              Height="48"
                              VerticalContentAlignment="Center"
                              ItemsSource="{x:Bind SearchMRU}"/>
@@ -540,7 +540,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="48" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="RegEx cheatsheet"
+                                    <TextBlock x:Uid="RegExCheatSheet_Title"
                                                FontWeight="SemiBold" />
                                     <ListView ItemsSource="{x:Bind SearchRegExShortcuts}"
                                               Grid.Row="1"
@@ -578,7 +578,7 @@
                                     </ListView>
                                     <HyperlinkButton Grid.Row="2"
                                                      VerticalAlignment="Bottom">
-                                        <TextBlock Text="Learn more about RegEx" />
+                                        <TextBlock x:Uid="RegExCheatSheet_LearnMore" />
                                     </HyperlinkButton>
                                 </Grid>
                             </Flyout>
@@ -588,13 +588,13 @@
 
 
                 <CheckBox x:Name="chckBox_regex"
-                          Content="Use RegEx"
+                          x:Uid="ChckBox_RegEx"
                           Margin="2,12,0,0" />
                 <CheckBox x:Name="chckBox_matchAll"
-                          Content="Match all occurences"
+                          x:Uid="ChckBox_MatchAll"
                           Margin="2,4,0,0" />
                 <CheckBox x:Name="chckBox_case"
-                          Content="Case sensitive"
+                          x:Uid="ChckBox_Case"
                           Margin="2,4,0,0" />
 
                 <Rectangle Height="1"
@@ -604,7 +604,7 @@
                 <Grid>
                     <AutoSuggestBox x:Name="textBox_replace"
                                     Margin="0,0,0,0"
-                                    PlaceholderText="Replace with"
+                                    x:Uid="ReplaceBox"
                                     Height="48"
                                     VerticalContentAlignment="Center"
                                     Padding="12,12,0,0"
@@ -627,7 +627,7 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="48" />
                                     </Grid.RowDefinitions>
-                                    <TextBlock Text="Replace using file creation date and time"
+                                    <TextBlock x:Uid="DateTimeCheatSheet_Title"
                                                FontWeight="SemiBold" />
                                     <ListView ItemsSource="{x:Bind DateTimeShortcuts}"
                                               Grid.Row="1"
@@ -669,7 +669,7 @@
                     </Button>
                 </Grid>
 
-                <TextBlock Text="Apply to"
+                <TextBlock x:Uid="TextBox_ApplyTo"
                            FontSize="12"
                            Margin="0,20,0,8" Foreground="{ThemeResource TextFillColorSecondaryBrush}"/>
 
@@ -693,26 +693,26 @@
                                   MinHeight="32"
                                   IsChecked="True"
                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                  ToolTipService.ToolTip="Include files"
+                                  x:Uid="TglButton_IncludeFiles"
                                   Style="{StaticResource CustomToggleButtonStyle}"/>
                     <ToggleButton x:Name="tglBtn_includeFolders"
                                   Content="&#xE8B7;"
                                   MinHeight="32"
                                   IsChecked="True"
                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                  ToolTipService.ToolTip="Include folders"
+                                  x:Uid="TglButton_IncludeFolders"
                                   Style="{StaticResource CustomToggleButtonStyle}"/>
                     <ToggleButton x:Name="tglBtn_includeSubfolders"
                                   Content="&#xE12F;"
                                   MinHeight="32"
                                   IsChecked="True"
                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"
-                                  ToolTipService.ToolTip="Include subfolders"
+                                  x:Uid="TglButton_IncludeSubFolders"
                                   Style="{StaticResource CustomToggleButtonStyle}"/>
                 </StackPanel>
 
 
-                <TextBlock Text="Text formatting"
+                <TextBlock x:Uid="TextBlock_TextFormatting"
                            FontSize="12"
                            Foreground="{ThemeResource TextFillColorSecondaryBrush}"
                            Margin="0,20,0,8"/>
@@ -742,7 +742,7 @@
                                   Content="Aa Aa"
                                   FontWeight="Medium"
                                   MinHeight="32"
-                                  ToolTipService.ToolTip="Capitalize Each Word"
+                                  x:Uid="TglButton_Capitalize"
                                   Style="{StaticResource CustomToggleButtonStyle}" />
                     <AppBarSeparator Margin="5,0,5,0" />
                     
@@ -750,7 +750,7 @@
                                   Content="&#xEA40;"
                                   FontFamily="{ThemeResource SymbolThemeFontFamily}"
                                   MinHeight="32"
-                                  ToolTipService.ToolTip="Enumerate items"
+                                  x:Uid="TglButton_EnumItems"
                                   Style="{StaticResource CustomToggleButtonStyle}" />
                 </StackPanel>
             </StackPanel>
@@ -775,7 +775,7 @@
                 
                 <Button x:Name="btn_settings"
                         Height="32"
-                        ToolTipService.ToolTip="Settings"
+                        x:Uid="TxtBlock_BtnSettings"
                         FontFamily="{ThemeResource SymbolThemeFontFamily}"
                         Grid.Row="5"
                         Background="Transparent"
@@ -825,7 +825,7 @@
                                    VerticalAlignment="Center"
                                    Margin="0,2,16,0"
                                    FontFamily="{ThemeResource SymbolThemeFontFamily}" />
-                        <TextBlock Text="Apply" />
+                        <TextBlock x:Uid="TxtBlock_BtnApply" />
                     </StackPanel>
                 </Button.Content>
             </Button>

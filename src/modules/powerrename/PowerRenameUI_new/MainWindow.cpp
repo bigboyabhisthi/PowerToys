@@ -19,35 +19,37 @@ namespace winrt::PowerRenameUI_new::implementation
         m_explorerItems = winrt::single_threaded_observable_vector<PowerRenameUI_new::ExplorerItem>();
 
         m_searchRegExShortcuts = winrt::single_threaded_observable_vector<PowerRenameUI_new::PatternSnippet>();
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\.", L"Matches any character"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\d", L"Any digit, short for [0-9]"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\D", L"A non-digit, short for [^0-9]"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\w", L"A non-whitespace character, short for [^\\s]"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\S", L"A word character, short for [a-zA-Z_0-9]"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\S+", L"Several non-whitespace characters"));
-        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\b", L"Matches a word boundary where a word character is [a-zA-Z0-9_]."));
+        auto resourceLoader{ Windows::ApplicationModel::Resources::ResourceLoader::GetForCurrentView() };
+
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\.", resourceLoader.GetString(L"RegExCheatSheet_MatchAny")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\d", resourceLoader.GetString(L"RegExCheatSheet_MatchDigit")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\D", resourceLoader.GetString(L"RegExCheatSheet_MatchNonDigit")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\w", resourceLoader.GetString(L"RegExCheatSheet_MatchNonWS")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\S", resourceLoader.GetString(L"RegExCheatSheet_MatchWordChar")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\S+", resourceLoader.GetString(L"RegExCheatSheet_MatchSeveralWS")));
+        m_searchRegExShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"\\b", resourceLoader.GetString(L"RegExCheatSheet_MatchWordBoundary")));
 
         m_dateTimeShortcuts = winrt::single_threaded_observable_vector<PowerRenameUI_new::PatternSnippet>();
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$YYYY", L"Year represented by a full four or five digits, depending on the calendar used"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$YY", L"Year represented only by the last two digits. A leading zero is added for single-digit years"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$Y", L"Year represented only by the last digit."));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MMMM", L"Name of the month"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MMM", L"Abbreviated name of the month"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MM", L"Month as digits with leading zeros for single-digit months"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$M", L"Month as digits without leading zeros for single-digit months"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DDDD", L"Name of the day of the week"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DDD", L"Abbreviated name of the day of the week"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DD", L"Day of the month as digits with leading zeros for single-digit days"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$D", L"Day of the month as digits without leading zeros for single-digit days"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$hh", L"Hours with leading zeros for single-digit hours"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$h", L"Hours without leading zeros for single-digit hours"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$mm", L"Minutes with leading zeros for single-digit minutes"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$m", L"Minutes without leading zeros for single-digit minutes"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$ss", L"Seconds with leading zeros for single-digit seconds"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$s", L"Seconds without leading zeros for single-digit seconds"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$fff", L"Milliseconds represented by full three digits"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$ff", L"Milliseconds represented only by the first two digit"));
-        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$f", L"Milliseconds represented only by the first digit"));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$YYYY", resourceLoader.GetString(L"DateTimeCheatSheet_FullYear")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$YY", resourceLoader.GetString(L"DateTimeCheatSheet_YearLastTwoDigits")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$Y", resourceLoader.GetString(L"DateTimeCheatSheet_YearLastDigit")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MMMM", resourceLoader.GetString(L"DateTimeCheatSheet_MonthName")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MMM", resourceLoader.GetString(L"DateTimeCheatSheet_MonthNameAbbr")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$MM", resourceLoader.GetString(L"DateTimeCheatSheet_MonthDigitLZero")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$M", resourceLoader.GetString(L"DateTimeCheatSheet_MonthDigit")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DDDD", resourceLoader.GetString(L"DateTimeCheatSheet_DayName")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DDD", resourceLoader.GetString(L"DateTimeCheatSheet_DayNameAbbr")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$DD", resourceLoader.GetString(L"DateTimeCheatSheet_DayDigitLZero")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$D", resourceLoader.GetString(L"DateTimeCheatSheet_DayDigit")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$hh", resourceLoader.GetString(L"DateTimeCheatSheet_HoursLZero")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$h", resourceLoader.GetString(L"DateTimeCheatSheet_Hours")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$mm", resourceLoader.GetString(L"DateTimeCheatSheet_MinutesLZero")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$m", resourceLoader.GetString(L"DateTimeCheatSheet_Minutes")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$ss", resourceLoader.GetString(L"DateTimeCheatSheet_SecondsLZero")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$s", resourceLoader.GetString(L"DateTimeCheatSheet_Seconds")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$fff", resourceLoader.GetString(L"DateTimeCheatSheet_MilliSeconds3D")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$ff", resourceLoader.GetString(L"DateTimeCheatSheet_MilliSeconds2D")));
+        m_dateTimeShortcuts.Append(winrt::make<PowerRenameUI_new::implementation::PatternSnippet>(L"$f", resourceLoader.GetString(L"DateTimeCheatSheet_MilliSeconds1D")));
 
         InitializeComponent();
     }

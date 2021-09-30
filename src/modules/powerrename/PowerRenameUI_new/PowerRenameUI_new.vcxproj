@@ -175,6 +175,9 @@
     <Midl Include="PatternSnippet.idl" />
   </ItemGroup>
   <ItemGroup>
+    <_WildCardPRIResource Include="Strings\*\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
     <None Include="placeholder.exe">
       <DeploymentContent>true</DeploymentContent>
@@ -199,5 +202,11 @@
     <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.210922.5\build\native\Microsoft.Windows.CppWinRT.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.210922.5\build\native\Microsoft.Windows.CppWinRT.props'))" />
     <Error Condition="!Exists('..\..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.210922.5\build\native\Microsoft.Windows.CppWinRT.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.Windows.CppWinRT.2.0.210922.5\build\native\Microsoft.Windows.CppWinRT.targets'))" />
     <Error Condition="!Exists('..\..\..\..\packages\Microsoft.UI.Xaml.2.7.0-prerelease.210913003\build\native\Microsoft.UI.Xaml.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\packages\Microsoft.UI.Xaml.2.7.0-prerelease.210913003\build\native\Microsoft.UI.Xaml.targets'))" />
+  </Target>
+  <Target Name="AddWildCardItems"
+      AfterTargets="BuildGenerateSources">
+    <ItemGroup>
+    <PRIResource Include="@(_WildCardPRIResource)" />
+    </ItemGroup>
   </Target>
 </Project>
